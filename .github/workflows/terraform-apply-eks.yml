@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 env:
-  TF_CLOUD_ORGANIZATION: "DSB"
+  TF_CLOUD_ORGANIZATION: "AnvilTeam"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "aws-devsecops-eks-cluster"
   CONFIG_DIRECTORY: "./terraform/eks-cluster"
@@ -23,6 +23,8 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.1
         id: apply-upload
         with:
+          token: ${{ env.TF_API_TOKEN }}
+          organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           workspace: ${{ env.TF_WORKSPACE }}
           directory: ${{ env.CONFIG_DIRECTORY }}
 
@@ -30,6 +32,8 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.3.1
         id: apply-run
         with:
+          token: ${{ env.TF_API_TOKEN }}
+          organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           workspace: ${{ env.TF_WORKSPACE }}
           configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
 
@@ -38,5 +42,7 @@ jobs:
         if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
         id: apply
         with:
+          token: ${{ env.TF_API_TOKEN }}
+          organization: ${{ env.TF_CLOUD_ORGANIZATION }}
           run: ${{ steps.apply-run.outputs.run_id }}
           comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
