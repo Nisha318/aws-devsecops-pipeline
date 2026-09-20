@@ -6,10 +6,10 @@ provider "random" {}
 
 terraform {
   cloud {
-    organization = "DSB"
+    organization = "AnvilTeam"
 
     workspaces {
-      name = "aws-devsecops-pipelines"
+      name = "dsb-aws-devsecops-pipelines"
     }
   }
 
