@@ -7,7 +7,7 @@ terraform {
     organization = "AnvilTeam"
 
     workspaces {
-      name = "aws-devsecops-eks-cluster"
+      name = "dsb-aws-devsecops-eks-cluster"
     }
   }
 }
