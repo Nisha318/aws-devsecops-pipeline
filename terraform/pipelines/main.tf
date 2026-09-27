@@ -37,7 +37,7 @@ module "cluster_auth" {
 module "awsome_fastapi_pipeline" {
   source = "./modules/codepipeline"
 
-  github_connection_arn = aws_codestarconnections_connection.default.arn
+  github_connection_arn = aws_codestarconnections_connection.dmoq
 
   s3_bucket_name = module.default_bucket.bucket_name
   s3_bucket_arn  = module.default_bucket.bucket_arn
